@@ -1,1 +1,11 @@
-/* Desenvolva seu estilo aqui */
+header > .container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+header > .container a {
+    display: inline-flex;
+    align-items: center;
+}
