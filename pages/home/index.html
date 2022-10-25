@@ -16,7 +16,7 @@
 
 <body>
 
-    <main >
+    <main>
         <div class="container">
             <header>
                 <section class="branding-content">
@@ -36,9 +36,9 @@
             </header>
 
             <nav class="categories">
-                <ul>
+                <ul class="categories-content">
                     <li>
-                        <button class="primary-btn">Todos</button>
+                        <button class="primary-btn tes">Todos</button>
                     </li>
                     <li>
                         <button class="grey-btn">Pintura</button>
@@ -50,6 +50,7 @@
                         <button class="grey-btn">Organização</button>
                     </li>
                 </ul>
+                <button onclick="scrollToRight()" class="pass-btn"></button>
             </nav>
 
             <section id="main-content" class="post-content">
@@ -95,6 +96,24 @@
         </div>
     </footer>
     <script type="module" src="index.js"></script>
+    <script>
+        function scrollToRight() {
+            const nav = document.querySelector(".categories");
+            const ul = document.querySelector(".categories-content");
+            ul.scrollBy(150, 0);
+            
+            if (!document.querySelector(".left-pass")) {
+                nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToLeft()" class="pass-btn left-pass"></button>`);
+            }
+        }
+
+        function scrollToLeft() {
+            const ul = document.querySelector(".categories-content");
+            ul.scrollBy(-1200, 0);
+
+            const button = document.querySelector(".left-pass").remove();
+        }
+    </script>
 </body>
 
 </html>
