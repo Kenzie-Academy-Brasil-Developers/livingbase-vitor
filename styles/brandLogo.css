@@ -1,0 +1,18 @@
+.branding {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.branding .logo-brand {
+    width: 29px;
+    height: 22.08px;
+    background-color: var(--color-brand-100);
+    border-radius: 0 6px;
+}
+
+.branding h3 {
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--color-grey-100);
+}

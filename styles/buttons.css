@@ -1,0 +1,90 @@
+.grey-btn {
+    background-color: var(--color-grey-600);
+    border: 1px solid var(--color-grey-600);
+    border-radius: var(--radius-1);
+    height: 2.375rem;
+    padding: 0 1.375rem;
+    font-family: var(--font-family-1);
+    color: var(--color-grey-200);
+    font-weight: 600;
+    font-size: var(--font-size-4);
+    cursor: pointer;
+    transition: all .3s ease-out;
+}
+
+.grey-btn:hover {
+    background-color: var(--color-grey-500);
+    border: 1px solid var(--color-grey-500);
+}
+
+.greyDark-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-grey-200);
+    border: 1px solid var(--color-grey-200);
+    border-radius: var(--radius-1);
+    height: 2.375rem;
+    padding: 0 1.375rem;
+    font-family: var(--font-family-1);
+    color: var(--color-grey-700);
+    font-weight: 600;
+    font-size: var(--font-size-4);
+    cursor: pointer;
+    transition: all .3s ease-out;
+}
+
+.greyDark-btn:hover {
+    background-color: var(--color-grey-300);
+    border: 1px solid var(--color-grey-300);
+}
+
+.primary-btn {
+    background-color: var(--color-brand-100);
+    border: 1px solid var(--color-brand-100);
+    border-radius: var(--radius-1);
+    height: 2.375rem;
+    padding: 0 1.375rem;
+    font-family: var(--font-family-1);
+    color: var(--color-grey-700);
+    font-weight: 600;
+    font-size: var(--font-size-4);
+    cursor: pointer;
+    transition: all .3s ease-out;
+}
+
+.primary-btn:hover {
+    background-color: var(--color-brand-200);
+    border: 1px solid var(--color-brand-200);
+}
+
+.pass-btn {
+    position: relative;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-0);
+    cursor: pointer;
+    background-color: transparent;
+    transition: all .3s ease-out;
+}
+
+.pass-btn::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    background-image: url(../assets/img/angle.svg);
+    background-repeat: no-repeat;
+    width: 8px;
+    height: 12px;
+    transition: .3s ease-out;
+}
+
+.pass-btn:hover::after {
+    background-image: url(../assets/img/angle-active.svg);
+}
+
+.pass-btn:hover {
+    background-color: var(--color-grey-500);
+}
