@@ -38,7 +38,7 @@
             <nav class="categories">
                 <ul class="categories-content">
                     <li>
-                        <button class="primary-btn tes">Todos</button>
+                        <button class="primary-btn">Todos</button>
                     </li>
                     <li>
                         <button class="grey-btn">Pintura</button>
@@ -50,7 +50,6 @@
                         <button class="grey-btn">Organização</button>
                     </li>
                 </ul>
-                <button onclick="scrollToRight()" class="pass-btn"></button>
             </nav>
 
             <section id="main-content" class="post-content">
@@ -97,11 +96,20 @@
     </footer>
     <script type="module" src="index.js"></script>
     <script>
+        function checkUlLength() {
+            const nav = document.querySelector(".categories");
+            const ul = document.querySelector(".categories-content");
+            if (ul.children.length >= 8) {
+                nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToRight()" class="pass-btn"></button>`);
+            }
+        }
+        checkUlLength();
+
         function scrollToRight() {
             const nav = document.querySelector(".categories");
             const ul = document.querySelector(".categories-content");
             ul.scrollBy(150, 0);
-            
+
             if (!document.querySelector(".left-pass")) {
                 nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToLeft()" class="pass-btn left-pass"></button>`);
             }
