@@ -51,6 +51,12 @@ header {
     margin-bottom: 93px;
 }
 
+.post-content .post img {
+    width: 548px;
+    height: 172px;
+    object-fit: cover;
+}
+
 .post-content .post h3 {
     font-weight: 600;
     font-size: var(--font-size-3);
