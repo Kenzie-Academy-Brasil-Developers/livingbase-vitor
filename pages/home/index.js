@@ -1,6 +1,6 @@
 import { toViewButton } from "../../scripts/activeButtons.js";
-import { categories } from "../../scripts/categoriesBar.js";
+import { scrollCategories } from "../../scripts/categoriesBar.js";
 
-categories.checkUlLength();
+scrollCategories.checkUlLength();
 
 toViewButton.categoriesButton();

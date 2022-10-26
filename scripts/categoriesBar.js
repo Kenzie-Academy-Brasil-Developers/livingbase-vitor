@@ -1,4 +1,4 @@
-export class categories {
+export class scrollCategories {
 
     static checkUlLength() {
 
