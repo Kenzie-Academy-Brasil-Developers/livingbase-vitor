@@ -1,5 +1,5 @@
 import { ToViewButton } from "./activeButtons.js";
-import { GetLocalStorage } from "./localStorage.js";
+import { Capture, GetLocalStorage } from "./localStorage.js";
 import { Api } from "./request.js"
 
 export class Render {
@@ -34,9 +34,10 @@ export class Render {
                 <img src="${elem.image}" alt="${elem.title.split(" ")[0]} image">
                 <h3>${elem.title}</h3>
                 <p>${elem.description}</p>
-                <span data-idPost="${elem.id}" class="show-content">Acessar conteúdo</span>
+                <span data-idpost="${elem.id}" class="show-content">Acessar conteúdo</span>
             </li>
             `);
         });
+        Capture.postClickAndRedirect();
     }
 }
