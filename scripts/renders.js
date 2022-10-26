@@ -4,7 +4,7 @@ import { Api } from "./request.js"
 
 export class Render {
 
-    static showCategories = async () => {
+    static showCategories = async (bool = true) => {
         const apiRequest = await Api.getPosts();
         const ul = document.querySelector(".categories-content");
 
@@ -14,7 +14,7 @@ export class Render {
 
         });
 
-        ToViewButton.categoriesButton();
+        ToViewButton.categoriesButton(bool);
     }
 
     static showPosts = async () => {

@@ -2,10 +2,10 @@ import { GetLocalStorage, SetLocalStorage } from "./localStorage.js";
 import { Render } from "./renders.js";
 
 export class ToViewButton {
-    static categoriesButton = (bool = true) => {
+    static categoriesButton = (bool) => {
         const allButtons = document.querySelectorAll("[data-ctgButton]")
         const filteredName = GetLocalStorage.activeFilter();
-
+        console.log(bool)
         allButtons.forEach(button => {
             if (filteredName && bool) {
                 if (button.innerHTML === filteredName) {
@@ -20,6 +20,10 @@ export class ToViewButton {
                 Render.showPosts();
                 SetLocalStorage.activeFilter(button.innerHTML);
                 button.classList.add("primary-btn");
+
+                if (!bool) {
+                    setTimeout(() => location.replace("/pages/home/"), 400);
+                }
             }
         });
     }
