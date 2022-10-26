@@ -2,12 +2,12 @@ import { GetLocalStorage, SetLocalStorage } from "./localStorage.js";
 import { Render } from "./renders.js";
 
 export class ToViewButton {
-    static categoriesButton = () => {
+    static categoriesButton = (bool = true) => {
         const allButtons = document.querySelectorAll("[data-ctgButton]")
         const filteredName = GetLocalStorage.activeFilter();
 
         allButtons.forEach(button => {
-            if (filteredName) {
+            if (filteredName && bool) {
                 if (button.innerHTML === filteredName) {
                     allButtons.forEach(elem => elem.classList.remove("primary-btn"));
                     button.classList.add("primary-btn");
