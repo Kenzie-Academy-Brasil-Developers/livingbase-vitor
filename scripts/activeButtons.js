@@ -1,4 +1,4 @@
-export  class toViewButton {
+export  class ToViewButton {
     static categoriesButton = () => {
         const allButtons = document.querySelectorAll("[data-ctgButton]")
         
