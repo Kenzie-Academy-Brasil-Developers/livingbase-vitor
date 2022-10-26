@@ -95,33 +95,6 @@
         </div>
     </footer>
     <script type="module" src="index.js"></script>
-    <script>
-        function checkUlLength() {
-            const nav = document.querySelector(".categories");
-            const ul = document.querySelector(".categories-content");
-            if (ul.children.length >= 8) {
-                nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToRight()" class="pass-btn"></button>`);
-            }
-        }
-        checkUlLength();
-
-        function scrollToRight() {
-            const nav = document.querySelector(".categories");
-            const ul = document.querySelector(".categories-content");
-            ul.scrollBy(150, 0);
-
-            if (!document.querySelector(".left-pass")) {
-                nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToLeft()" class="pass-btn left-pass"></button>`);
-            }
-        }
-
-        function scrollToLeft() {
-            const ul = document.querySelector(".categories-content");
-            ul.scrollBy(-1200, 0);
-
-            const button = document.querySelector(".left-pass").remove();
-        }
-    </script>
 </body>
 
 </html>
