@@ -1,33 +1,36 @@
 import { ToViewButton } from "./activeButtons.js";
+import { ScrollCategories } from "./categoriesBar.js";
 import { Capture, GetLocalStorage } from "./localStorage.js";
+import { Observer } from "./observer.js";
 import { Api } from "./request.js"
 
 export class Render {
 
     static showCategories = async (bool = true) => {
-        const apiRequest = await Api.getPosts();
+        const data = ['Segurança', 'Decoração', 'Organização', 'Aromas', 'Reforma', 'Limpeza', 'Pintura'];
         const ul = document.querySelector(".categories-content");
 
-        apiRequest.slice(0, -1).forEach(elem => {
+        data.forEach((category) => {
             ul.insertAdjacentHTML("beforeend",
-                `<li><button data-ctgButton class="grey-btn">${elem.category}</button></li>`);
-
+                `<li><button data-ctgButton class="grey-btn">${category}</button></li>`);
         });
-
+        ScrollCategories.checkUlLength();
         ToViewButton.categoriesButton(bool);
     }
 
-    static showPosts = async () => {
+    static showPosts = async (num = 0) => {
         const ul = document.querySelector(".post-wrapper");
-        let data = await Api.getPosts();
+        let data = await Api.getPosts(num);
 
         if (GetLocalStorage.activeFilter() && GetLocalStorage.activeFilter() !== "Todos") {
             const filterName = GetLocalStorage.activeFilter();
             const filtered = data.filter(elem => elem.category === filterName);
             data = filtered;
+            ul.innerHTML = "";
+        } else if (GetLocalStorage.activeFilter() == "Todos" && num == 0) {
+            ul.innerHTML = "";
         }
-        
-        ul.innerHTML = "";
+
         data.forEach(elem => {
             ul.insertAdjacentHTML("beforeend", `
             <li class="post">
@@ -38,6 +41,11 @@ export class Render {
             </li>
             `);
         });
+        if (GetLocalStorage.activeFilter() !== "Todos") {
+            Observer.checkFinalPost(false);
+        } else {
+            Observer.checkFinalPost();
+        }
         Capture.postClickAndRedirect();
     }
 
@@ -47,7 +55,6 @@ export class Render {
         const title = document.querySelector("[data-title]");
         const description = document.querySelector("[data-description]");
         const postContent = document.querySelector(".main-post");
-        console.log(postContent)
 
         title.innerHTML = apiRequest.title;
         description.innerHTML = apiRequest.description;

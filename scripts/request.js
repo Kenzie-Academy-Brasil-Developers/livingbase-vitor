@@ -1,8 +1,8 @@
 export class Api {
     
-    static getPosts = async () => {
+    static getPosts = async (num) => {
         try {
-            const request = await fetch(`https://m2-api-living.herokuapp.com/news?page=20`, {
+            const request = await fetch(`https://m2-api-living.herokuapp.com/news?page=${num}`, {
                 method: "GET",
             });
 
