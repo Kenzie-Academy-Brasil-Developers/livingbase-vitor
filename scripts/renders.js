@@ -1,5 +1,7 @@
 import { ToViewButton } from "./activeButtons.js";
+import { CheckDuplicate } from "./checkDuplicate.js";
 import { Capture, GetLocalStorage } from "./localStorage.js";
+import { Observer } from "./observer.js";
 import { Api } from "./request.js"
 
 export class Render {
@@ -8,10 +10,11 @@ export class Render {
         const apiRequest = await Api.getPosts();
         const ul = document.querySelector(".categories-content");
 
-        apiRequest.slice(0, -1).forEach(elem => {
+        apiRequest.forEach((elem) => {
+            CheckDuplicate.categories(apiRequest, elem.category)
+
             ul.insertAdjacentHTML("beforeend",
                 `<li><button data-ctgButton class="grey-btn">${elem.category}</button></li>`);
-
         });
 
         ToViewButton.categoriesButton(bool);
@@ -26,7 +29,7 @@ export class Render {
             const filtered = data.filter(elem => elem.category === filterName);
             data = filtered;
         }
-        
+
         ul.innerHTML = "";
         data.forEach(elem => {
             ul.insertAdjacentHTML("beforeend", `
@@ -38,6 +41,7 @@ export class Render {
             </li>
             `);
         });
+        Observer.checkFinalPost();
         Capture.postClickAndRedirect();
     }
 
