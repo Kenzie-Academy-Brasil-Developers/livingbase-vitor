@@ -41,6 +41,8 @@ header>.container a {
 
 .main-post img {
     width: 100%;
+    height: 402px;
+    object-fit: cover;
     margin: 3.3125rem 0;
 }
 
