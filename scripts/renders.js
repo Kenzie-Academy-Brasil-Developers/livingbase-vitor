@@ -1,36 +1,42 @@
 import { ToViewButton } from "./activeButtons.js";
+import { ScrollCategories } from "./categoriesBar.js";
 import { CheckDuplicate } from "./checkDuplicate.js";
 import { Capture, GetLocalStorage } from "./localStorage.js";
 import { Observer } from "./observer.js";
 import { Api } from "./request.js"
+import { StorageToRender } from "./storage.js";
+
 
 export class Render {
 
-    static showCategories = async (bool = true) => {
-        const apiRequest = await Api.getPosts();
+    static showCategories = async ( bool = true) => {
         const ul = document.querySelector(".categories-content");
+        const data = await StorageToRender.apiPosts();
+        console.log(data)
 
-        apiRequest.forEach((elem) => {
-            CheckDuplicate.categories(apiRequest, elem.category)
+        data.forEach((elem) => {
+            CheckDuplicate.categories(data, elem.category)
 
             ul.insertAdjacentHTML("beforeend",
                 `<li><button data-ctgButton class="grey-btn">${elem.category}</button></li>`);
         });
-
         ToViewButton.categoriesButton(bool);
+        ScrollCategories.checkUlLength();
     }
 
-    static showPosts = async () => {
+    static showPosts = async (data, num = 0) => {
         const ul = document.querySelector(".post-wrapper");
-        let data = await Api.getPosts();
+        console.log(data)
 
         if (GetLocalStorage.activeFilter() && GetLocalStorage.activeFilter() !== "Todos") {
             const filterName = GetLocalStorage.activeFilter();
             const filtered = data.filter(elem => elem.category === filterName);
             data = filtered;
+            ul.innerHTML = "";
+        } else if (GetLocalStorage.activeFilter() == "Todos" && num == 0) {
+            ul.innerHTML = "";
         }
 
-        ul.innerHTML = "";
         data.forEach(elem => {
             ul.insertAdjacentHTML("beforeend", `
             <li class="post">
@@ -41,7 +47,11 @@ export class Render {
             </li>
             `);
         });
-        Observer.checkFinalPost();
+        if (GetLocalStorage.activeFilter() !== "Todos") {
+            Observer.checkFinalPost(false);
+        } else {
+            Observer.checkFinalPost();
+        }
         Capture.postClickAndRedirect();
     }
 
