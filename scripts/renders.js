@@ -18,9 +18,9 @@ export class Render {
         ToViewButton.categoriesButton(bool);
     }
 
-    static showPosts = async () => {
+    static showPosts = async (num = 0) => {
         const ul = document.querySelector(".post-wrapper");
-        let data = await Api.getPosts();
+        let data = await Api.getPosts(num);
 
         if (GetLocalStorage.activeFilter() && GetLocalStorage.activeFilter() !== "Todos") {
             const filterName = GetLocalStorage.activeFilter();
@@ -49,7 +49,6 @@ export class Render {
         const title = document.querySelector("[data-title]");
         const description = document.querySelector("[data-description]");
         const postContent = document.querySelector(".main-post");
-        console.log(postContent)
 
         title.innerHTML = apiRequest.title;
         description.innerHTML = apiRequest.description;
