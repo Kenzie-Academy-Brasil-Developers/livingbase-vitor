@@ -26,9 +26,11 @@ export class Render {
             const filterName = GetLocalStorage.activeFilter();
             const filtered = data.filter(elem => elem.category === filterName);
             data = filtered;
+            ul.innerHTML = "";
+        } else if (GetLocalStorage.activeFilter() == "Todos" && num == 0) {
+            ul.innerHTML = "";
         }
 
-        ul.innerHTML = "";
         data.forEach(elem => {
             ul.insertAdjacentHTML("beforeend", `
             <li class="post">
@@ -39,7 +41,11 @@ export class Render {
             </li>
             `);
         });
-        Observer.checkFinalPost();
+        if (GetLocalStorage.activeFilter() !== "Todos") {
+            Observer.checkFinalPost(false);
+        } else {
+            Observer.checkFinalPost();
+        }
         Capture.postClickAndRedirect();
     }
 
