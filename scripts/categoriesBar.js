@@ -5,7 +5,7 @@ export class ScrollCategories {
         const nav = document.querySelector(".categories");
         const ul = document.querySelector(".categories-content");
         if (ul.children.length >= 8) {
-            nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToRight()" class="pass-btn right-pass"></button>`);
+            nav.insertAdjacentHTML("beforeend", `<button class="pass-btn right-pass"></button>`);
             this.scrollToRight();
         }
     }
@@ -19,7 +19,7 @@ export class ScrollCategories {
             ul.scrollBy(150, 0);
 
             if (!document.querySelector(".left-pass")) {
-                nav.insertAdjacentHTML("beforeend", `<button onclick="scrollToLeft()" class="pass-btn left-pass"></button>`);
+                nav.insertAdjacentHTML("beforeend", `<button class="pass-btn left-pass"></button>`);
                 this.scrollToLeft();
             }
         }
