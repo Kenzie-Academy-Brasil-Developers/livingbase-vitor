@@ -21,4 +21,6 @@ export class Capture {
             }
         });
     }
+
+    static containLog = () => !GetLocalStorage.activeFilter() ? SetLocalStorage.activeFilter("Todos") : false;
 }
