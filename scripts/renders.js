@@ -1,5 +1,5 @@
 import { ToViewButton } from "./activeButtons.js";
-import { CheckDuplicate } from "./checkDuplicate.js";
+import { ScrollCategories } from "./categoriesBar.js";
 import { Capture, GetLocalStorage } from "./localStorage.js";
 import { Observer } from "./observer.js";
 import { Api } from "./request.js"
@@ -7,16 +7,14 @@ import { Api } from "./request.js"
 export class Render {
 
     static showCategories = async (bool = true) => {
-        const apiRequest = await Api.getPosts();
+        const data = ['Segurança', 'Decoração', 'Organização', 'Aromas', 'Reforma', 'Limpeza', 'Pintura'];
         const ul = document.querySelector(".categories-content");
 
-        apiRequest.forEach((elem) => {
-            CheckDuplicate.categories(apiRequest, elem.category)
-
+        data.forEach((category) => {
             ul.insertAdjacentHTML("beforeend",
-                `<li><button data-ctgButton class="grey-btn">${elem.category}</button></li>`);
+                `<li><button data-ctgButton class="grey-btn">${category}</button></li>`);
         });
-
+        ScrollCategories.checkUlLength();
         ToViewButton.categoriesButton(bool);
     }
 
