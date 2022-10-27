@@ -40,4 +40,20 @@ export class Render {
         });
         Capture.postClickAndRedirect();
     }
+
+    static postPage = async () => {
+        const apiRequest = await Api.getPostById(GetLocalStorage.idPost());
+
+        const title = document.querySelector("[data-title]");
+        const description = document.querySelector("[data-description]");
+        const postContent = document.querySelector(".main-post");
+        console.log(postContent)
+
+        title.innerHTML = apiRequest.title;
+        description.innerHTML = apiRequest.description;
+        postContent.insertAdjacentHTML("beforeend", `
+        <img src="${apiRequest.image}" alt="${apiRequest.title.split(" ")[0]} image">
+        <p>${apiRequest.content}</p>
+        `);
+    }
 }
