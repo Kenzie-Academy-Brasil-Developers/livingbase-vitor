@@ -1,13 +1,17 @@
+import { Render } from "./renders.js";
 import { Api } from "./request.js";
 
-const postsStorage = [];
+export const logStorage = [];
 
 export class StorageToRender {
 
     static apiPosts = async (num = 0) => {
-        const apiData = await Api.getPosts(num);
-        postsStorage.push(...apiData);
-        console.log(postsStorage)
-        return postsStorage;
+        await Api.getPosts(num)
+        .then((res) => {
+            if (logStorage.length == 18) return false;
+            logStorage.push(...res);
+            Render.showCategories(logStorage);
+            Render.showPosts(logStorage);
+        });
     }
 }
