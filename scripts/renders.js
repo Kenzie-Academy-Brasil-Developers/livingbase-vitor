@@ -1,37 +1,42 @@
 import { ToViewButton } from "./activeButtons.js";
 import { ScrollCategories } from "./categoriesBar.js";
+import { CheckDuplicate } from "./checkDuplicate.js";
 import { Capture, GetLocalStorage } from "./localStorage.js";
 import { Observer } from "./observer.js";
 import { Api } from "./request.js"
 
 export class Render {
 
-    static showCategories = async (bool = true) => {
-        const data = ['Segurança', 'Decoração', 'Organização', 'Aromas', 'Reforma', 'Limpeza', 'Pintura'];
+    static showCategories = (data, bool = true) => {
         const ul = document.querySelector(".categories-content");
+        const newData = [...data];
 
-        data.forEach((category) => {
+        ul.innerHTML = "";
+        ul.insertAdjacentHTML("beforeend", `<li><button data-ctgButton class="grey-btn primary-btn">Todos</button></li>`);
+
+        newData.forEach((elem) => {
+            CheckDuplicate.categories(newData, elem.category);
             ul.insertAdjacentHTML("beforeend",
-                `<li><button data-ctgButton class="grey-btn">${category}</button></li>`);
+                `<li><button data-ctgButton class="grey-btn">${elem.category}</button></li>`);
         });
-        ScrollCategories.checkUlLength();
         ToViewButton.categoriesButton(bool);
+        ScrollCategories.checkUlLength();
     }
 
-    static showPosts = async (num = 0) => {
+    static showPosts = (data, num = 0) => {
         const ul = document.querySelector(".post-wrapper");
-        let data = await Api.getPosts(num);
+        let newData = [...data];
 
         if (GetLocalStorage.activeFilter() && GetLocalStorage.activeFilter() !== "Todos") {
             const filterName = GetLocalStorage.activeFilter();
-            const filtered = data.filter(elem => elem.category === filterName);
-            data = filtered;
+            const filtered = newData.filter(elem => elem.category === filterName);
+            newData = filtered;
             ul.innerHTML = "";
         } else if (GetLocalStorage.activeFilter() == "Todos" && num == 0) {
             ul.innerHTML = "";
         }
 
-        data.forEach(elem => {
+        newData.forEach(elem => {
             ul.insertAdjacentHTML("beforeend", `
             <li class="post">
                 <img src="${elem.image}" alt="${elem.title.split(" ")[0]} image">
