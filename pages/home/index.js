@@ -1,5 +1,5 @@
 import { Capture } from "../../scripts/localStorage.js";
-import { Render } from "../../scripts/renders.js";
+import { StorageToRender } from "../../scripts/storage.js";
 
 Capture.containLog();
-Render.showCategories();
+StorageToRender.apiPosts();
