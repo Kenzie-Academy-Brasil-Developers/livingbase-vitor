@@ -4,19 +4,18 @@ import { CheckDuplicate } from "./checkDuplicate.js";
 import { Capture, GetLocalStorage } from "./localStorage.js";
 import { Observer } from "./observer.js";
 import { Api } from "./request.js"
-import { StorageToRender } from "./storage.js";
-
 
 export class Render {
 
-    static showCategories = async ( bool = true) => {
+    static showCategories = (data, bool = true) => {
         const ul = document.querySelector(".categories-content");
-        const data = await StorageToRender.apiPosts();
-        console.log(data)
+        const newData = [...data];
 
-        data.forEach((elem) => {
-            CheckDuplicate.categories(data, elem.category)
+        ul.innerHTML = "";
+        ul.insertAdjacentHTML("beforeend", `<li><button data-ctgButton class="grey-btn primary-btn">Todos</button></li>`);
 
+        newData.forEach((elem) => {
+            CheckDuplicate.categories(newData, elem.category);
             ul.insertAdjacentHTML("beforeend",
                 `<li><button data-ctgButton class="grey-btn">${elem.category}</button></li>`);
         });
@@ -24,20 +23,20 @@ export class Render {
         ScrollCategories.checkUlLength();
     }
 
-    static showPosts = async (data, num = 0) => {
+    static showPosts = (data, num = 0) => {
         const ul = document.querySelector(".post-wrapper");
-        console.log(data)
+        let newData = [...data];
 
         if (GetLocalStorage.activeFilter() && GetLocalStorage.activeFilter() !== "Todos") {
             const filterName = GetLocalStorage.activeFilter();
-            const filtered = data.filter(elem => elem.category === filterName);
-            data = filtered;
+            const filtered = newData.filter(elem => elem.category === filterName);
+            newData = filtered;
             ul.innerHTML = "";
         } else if (GetLocalStorage.activeFilter() == "Todos" && num == 0) {
             ul.innerHTML = "";
         }
 
-        data.forEach(elem => {
+        newData.forEach(elem => {
             ul.insertAdjacentHTML("beforeend", `
             <li class="post">
                 <img src="${elem.image}" alt="${elem.title.split(" ")[0]} image">
@@ -61,7 +60,6 @@ export class Render {
         const title = document.querySelector("[data-title]");
         const description = document.querySelector("[data-description]");
         const postContent = document.querySelector(".main-post");
-        console.log(postContent)
 
         title.innerHTML = apiRequest.title;
         description.innerHTML = apiRequest.description;
