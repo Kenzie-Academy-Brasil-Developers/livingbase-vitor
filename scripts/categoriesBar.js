@@ -4,7 +4,7 @@ export class ScrollCategories {
 
         const nav = document.querySelector(".categories");
         const ul = document.querySelector(".categories-content");
-        if (ul.children.length >= 8) {
+        if (ul.children.length >= 8 && !document.querySelector(".pass-btn")) {
             nav.insertAdjacentHTML("beforeend", `<button class="pass-btn right-pass"></button>`);
             this.scrollToRight();
         }
